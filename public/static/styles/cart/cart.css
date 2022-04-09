@@ -1,0 +1,368 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: Rel;
+  src: url(/Fonts/raleway/Raleway-Medium.ttf);
+}
+.head_zag {
+  font-family: Rel;
+  margin-top: 100px;
+  font-size: 30px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 56px;
+  padding: 0 20px 0 20px;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 700px;
+}
+main .buy {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+main .buy a button {
+  width: 180px;
+  height: 50px;
+  background: #ffe5e4;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #cccccc;
+}
+main .nofound {
+  font-family: Rel;
+  color: #a6a6a6;
+  font-size: 20px;
+}
+main .item {
+  font-family: Rel;
+  width: 800px;
+  padding: 20px;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+main .item .img img {
+  width: 150px;
+  height: 150px;
+  background-size: 100%;
+}
+main .item .description {
+  width: 600px;
+}
+main .item .description .small_desc_and_sum {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+main .item .description .small_desc_and_sum .small_desc {
+  color: #a6a6a6;
+}
+main .item .description .small_desc_and_sum .sum {
+  color: #a6a6a6;
+}
+main .item .description .name_and_price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+main .item .description .name_and_price .name_and_lowprice {
+  width: 340px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+main .item .description .name_and_price .name_and_lowprice .name {
+  font-size: 24px;
+  font-weight: 300;
+}
+main .item .description .name_and_price .name_and_lowprice .lowprice p {
+  font-size: 16px;
+  color: #a6a6a6;
+}
+main .item .description .name_and_price .name_and_lowprice .lowprice p b {
+  color: #f5b03f;
+}
+main .item .description .name_and_price .price p {
+  color: #a6a6a6;
+  font-size: 20px;
+}
+main .item .description .name_and_price .price p b {
+  font-size: 24px;
+  color: #f5b03f;
+}
+main .item .description .val_and_price {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+main .item .description .val_and_price .all {
+  display: flex;
+  width: 180px;
+  justify-content: space-between;
+}
+main .item .description .val_and_price .all .weight p {
+  margin-left: 3px;
+  margin-bottom: 3px;
+  color: #a6a6a6;
+}
+main .item .description .val_and_price .all .weight div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 32px;
+  background: #ffe5e4;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  font-family: Rel;
+}
+main .item .description .val_and_price .all .val p {
+  margin-left: 3px;
+  margin-bottom: 3px;
+  color: #a6a6a6;
+}
+main .item .description .val_and_price .all .val div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 32px;
+  background: #ffe5e4;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  font-family: Rel;
+}
+main .item .description .val_and_price .icons {
+  display: flex;
+  width: 60px;
+  justify-content: space-between;
+}
+main .item .description .val_and_price .icons .heart img {
+  width: 22px;
+  height: 22px;
+}
+main .item .description .val_and_price .icons .delete img {
+  width: 22px;
+  height: 22px;
+}
+.item:nth-child(1) {
+  border-top: 1px solid #e6e6e6;
+}
+@media screen and (max-width: 900px) {
+  main .item {
+    width: 600px;
+  }
+  main .item .description .name_and_price .name_and_lowprice {
+    width: 320px;
+  }
+  main .item .description .name_and_price .name_and_lowprice .lowprice {
+    display: none;
+  }
+}
+@media screen and (max-width: 710px) {
+  .head_zag {
+    font-size: 26px;
+  }
+}
+@media screen and (max-width: 690px) {
+  main .item {
+    width: 500px;
+  }
+  main .item .description {
+    width: 500px;
+  }
+  main .item .description .small_desc_and_sum {
+    width: 350px;
+  }
+  main .item .description .name_and_price {
+    width: 350px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .head_zag {
+    font-size: 22px;
+  }
+}
+@media screen and (max-width: 560px) {
+  main .item {
+    width: 450px;
+  }
+  main .item .description {
+    width: 300px;
+  }
+  main .item .description .small_desc_and_sum {
+    width: 300px;
+  }
+  main .item .description .name_and_price {
+    width: 300px;
+  }
+  main .item .description .name_and_price .name_and_lowprice .name {
+    font-size: 20px;
+  }
+  main .item .description .name_and_price .price p {
+    font-size: 15px;
+  }
+  main .item .description .name_and_price .price p b {
+    font-size: 21px;
+  }
+  main .item .description .val_and_price .icons {
+    flex-direction: column;
+    width: 22px;
+  }
+}
+@media screen and (max-width: 500px) {
+  main .item {
+    width: 380px;
+  }
+  main .item .img img {
+    width: 100px;
+    height: 100px;
+  }
+  main .item .description {
+    width: 280px;
+  }
+  main .item .description .small_desc_and_sum {
+    width: 280px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  main .item .description .name_and_price {
+    margin-bottom: 10px;
+    width: 280px;
+  }
+  main .item .description .name_and_price .name_and_lowprice .name {
+    font-size: 17px;
+  }
+  main .item .description .name_and_price .price p {
+    font-size: 15px;
+  }
+  main .item .description .name_and_price .price p b {
+    font-size: 18px;
+  }
+  main .item .description .val_and_price .all .weight p {
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .all .val p {
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .icons {
+    flex-direction: column;
+    width: 22px;
+  }
+}
+@media screen and (max-width: 410px) {
+  main .item {
+    width: 320px;
+  }
+  main .item .img img {
+    width: 80px;
+    height: 80px;
+  }
+  main .item .description {
+    width: 240px;
+  }
+  main .item .description .small_desc_and_sum {
+    width: 240px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  main .item .description .name_and_price {
+    width: 240px;
+  }
+  main .item .description .name_and_price .name_and_lowprice .name {
+    font-size: 17px;
+  }
+  main .item .description .name_and_price .price p {
+    font-size: 15px;
+  }
+  main .item .description .name_and_price .price p b {
+    font-size: 18px;
+  }
+  main .item .description .val_and_price .all {
+    width: 140px;
+  }
+  main .item .description .val_and_price .all .weight p {
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .all .weight select {
+    width: 60px;
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .all .val p {
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .all .val select {
+    width: 60px;
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .icons {
+    flex-direction: column;
+    width: 22px;
+  }
+}
+@media screen and (max-width: 350px) {
+  main .item {
+    width: 280px;
+  }
+  main .item .img img {
+    width: 80px;
+    height: 80px;
+  }
+  main .item .description {
+    width: 200px;
+  }
+  main .item .description .small_desc_and_sum {
+    width: 200px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  main .item .description .name_and_price {
+    width: 200px;
+  }
+  main .item .description .name_and_price .name_and_lowprice .name {
+    font-size: 15px;
+  }
+  main .item .description .name_and_price .price p {
+    font-size: 13 px;
+  }
+  main .item .description .name_and_price .price p b {
+    font-size: 15px;
+  }
+  main .item .description .val_and_price .all {
+    width: 140px;
+  }
+  main .item .description .val_and_price .all .weight p {
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .all .weight select {
+    width: 60px;
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .all .val p {
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .all .val select {
+    width: 60px;
+    font-size: 12px;
+  }
+  main .item .description .val_and_price .icons {
+    flex-direction: column;
+    width: 22px;
+  }
+}

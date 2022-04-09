@@ -1,0 +1,165 @@
+<header>
+    <nav>
+        <ul class="mobile-nav">
+            <li>
+                <div class="menu-icon-container">
+                    <div class="menu-icon">
+                        <span class="line-1"></span>
+                        <span class="line-2"></span>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <a href="/" class="link-logo"></a>
+            </li>
+
+            <li>
+                <span class="link-bag" id="cart"></span>
+            </li>
+        </ul>
+
+        <ul class="desktop-nav">
+            <li>
+                <a href="/" class="link-logo"></a>
+            </li>
+            <li>
+                <a href="/catalog">Каталог</a>
+            </li>
+            <li>
+                <a href="/info">О продукции</a>
+            </li>
+            <li>
+                <a href="/info#1">Доставка и оплата</a>
+            </li>
+            <li>
+                <a href="/info#4">Контакты</a>
+            </li>
+            <li>
+                <a href="#" class="link-search"></a>
+            </li>
+            <li>
+                <span class="link-bag" id="cart2"></span>
+                <div class="all_cart close">
+                    <div class="cart_box">
+                        <div class="low_spis">
+                            {{#if cart}}
+                            {{#each cart}}
+                            <span>
+                                <div class="box_c">
+                                    <img src="{{img}}" alt="">
+                                    <p>{{@key}}</p>
+                                </div>
+                            </span>
+                            {{/each}}
+                            {{!-- <span>
+                                <div class="box_c">
+                                    <img src="/images/mors.jpeg" alt="">
+                                    <p>Lorem ipsum dolor sit amet consectetur</p>
+                                </div>
+                            </span>
+                            <span>
+                                <div class="box_c">
+                                    <img src="/images/mors.jpeg" alt="">
+                                    <p>Lorem ipsum dolor sit amet consectetur</p>
+                                </div>
+                            </span> --}}
+                            {{else}}
+                            <div class="empty_cart">
+                                <p>Ваша корзина пуста</p>
+                            </div>
+                            {{/if}}
+                        </div>
+                        <ol>
+                            <li>
+                                <div class="item">
+                                    <img src="/icons/cart.png" alt="">
+                                    <p><a href="/cart">Корзина</a></p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <img src="/icons/heart.png" alt="">
+                                    <p><a href="/like">Избранное</a></p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <img src="/icons/box.png" alt="">
+                                    <p>Заказы</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <img src="/icons/user.png" alt="">
+                                    {{#if islogin}}
+                                    <p>Валерий - выйти</p>
+                                    {{else}}
+                                    <p>Войти</p>
+                                    {{/if}}
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="search-container hide">
+        <div class="link-search"></div>
+        <div class="search-bar">
+            <form action="/search">
+                <input name="q" type="text" placeholder="Поиск:" autocomplete="off">
+            </form>
+        </div>
+        <div class="link-close"></div>
+
+        <div class="quick-links">
+            <h2>Наиболее частые запросы</h2>
+            <ul>
+                <li>
+                    <a href="/catalog?type=Ягода">Свежие ягоды</a>
+                </li>
+                <li>
+                    <a href="/catalog?type=Морс">Морсы</a>
+                </li>
+                <li>
+                    <a href="/catalog?type=Чай">Чай</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="mobile-search-container">
+        <div class="link-search"></div>
+        <div class="search-bar">
+            <form action="/search">
+                <input name="q" type="text" placeholder="Поиск:" autocomplete="off">
+            </form>
+        </div>
+        <span class="cancel-btn">Закрыть</span>
+
+        <div class="quick-links">
+            <h2>Наиболее частые запросы</h2>
+            <ul>
+                <li>
+                    <a href="/catalog?type=Ягода">Свежие ягоды</a>
+                </li>
+                <li>
+                    <a href="/catalog?type=Морс">Морсы</a>
+                </li>
+                <li>
+                    <a href="/catalog?type=Чай">Чай</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="overlay"></div>

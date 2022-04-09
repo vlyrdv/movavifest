@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/styles/cart/cart.css">
+    <link rel="stylesheet" href="/static/styles/header/header.css">
+    <link rel="stylesheet" href="/static/styles/footer/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="/static/js/cart/handlebars.js" defer></script>
+    <script src="/static/js/cart/cart.js" defer></script>
+    <script src="/static/js/header/header.js" defer></script>
+</head>
+
+<body>
+    {{> header}}
+    {{#if data}}
+    <div class="head_zag">
+        <p>Стоимость всех продуктов в корзине: {{summ}}р</p>
+    </div>
+    {{else}}
+    <div class="head_zag">
+        <p>Стоимость всех продуктов в корзине: 0р</p>
+    </div>
+    {{/if}}
+    <main>
+        {{#if data}}
+        {{#each data}}
+        <div class="item">
+            <div class="img">
+                <img src="{{img}}" alt="">
+            </div>
+            <div class="description">
+                <div class="small_desc_and_sum">
+                    <div class="small_desc">
+                        <p>{{sm_desc}}</p>
+                    </div>
+                    <div class="sum">
+                        <p>Сумма:</p>
+                    </div>
+                </div>
+                <div class="name_and_price">
+                    <div class="name_and_lowprice">
+                        <div class="name">
+                            <p>{{@key}}</p>
+                        </div>
+                        <div class="lowprice">
+                            <p><b id="lowprice">{{price}}</b> р / 100г.</p>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <p><b id="pr1ce">{{itog_price}}</b>р</p>
+                    </div>
+                </div>
+                <div class="val_and_price">
+                    <div class="all">
+                        <div class="weight">
+                            <p>Вес</p>
+                            <div>
+                                <span>{{weight}} гр.</span>
+                            </div>
+                            {{!-- <select name="" id="weight">
+                                {{#each grams}}
+                                {{#if this.key}}
+                                <option value="{{this.grams_value}}" selected>{{this.grams_value}} гр</option>
+                                {{else}}
+                                <option value="{{this.grams_value}}">{{this.grams_value}} гр</option>
+                                {{/if}}
+                                {{/each}}
+                            </select> --}}
+                        </div>
+                        <div class="val">
+                            <p>Пакеты</p>
+                            <div>
+                                <span>{{value}} шт.</span>
+                            </div>
+                            {{!-- <select name="" id="val">
+                                {{#each vals}}
+                                {{#if this.key}}
+                                <option value="{{this.pack_value}}" selected>{{this.pack_value}} шт</option>
+                                {{else}}
+                                <option value="{{this.pack_value}}">{{this.pack_value}} шт</option>
+                                {{/if}}
+                                {{/each}}
+                            </select> --}}
+                        </div>
+                    </div>
+                    <div class="icons">
+                        <div class="heart">
+                            <a href="/likeadd?prod_id={{id_product}}"><img src="/icons/heart_g.png" alt=""></a>
+                        </div>
+                        <div class="delete">
+                            <a href="/cartdelete?id={{cart_id}}"><img src="/icons/delete_cart.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        <div class="buy">
+            <a href="">
+                <button>Заказать</button>
+            </a>
+        </div>
+        {{else}}
+        <div class="nofound">
+            <p>В вашей корзине нет товаров</p>
+        </div>
+        {{/if}}
+    </main>
+    {{> footer}}
+</body>
+
+</html>

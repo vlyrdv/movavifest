@@ -1,0 +1,195 @@
+@important_color : #ffe5e4;
+
+@font-face {
+    font-family: Ralewaymed;
+    src: url(/Fonts/raleway/Raleway-Medium.ttf);
+}
+
+body {
+    min-height: 800px;
+}
+
+ol,
+ul {
+    padding-left: 0rem;
+}
+
+.heading {
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    font-family: Ralewaymed;
+    margin-top: 100px;
+}
+
+.catalog-nav {
+    margin-top: 56px;
+    margin-bottom: 56px;
+    display: flex;
+    font-family: Ralewaymed;
+    justify-content: center;
+
+
+    button {
+        width: 120px;
+        height: 50px;
+        border: none;
+        background: @important_color;
+        transition: 0.5s all;
+    }
+
+    a:nth-child(1) {
+        button {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+    }
+
+    a:nth-child(2) {
+        button {
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-top: none;
+            border-bottom: none;
+        }
+    }
+
+    a:nth-child(3) {
+        button {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+    }
+
+    button:hover {
+        background: rgb(255, 201, 200);
+    }
+
+}
+
+.heig {
+    min-height: 700px;
+}
+
+.product {
+    font-family: Ralewaymed;
+    box-shadow: 0px 0px 8px #afafaf;
+    width: 250px;
+    height: 340px;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 10px;
+
+    .img {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 150px;
+            height: 150px;
+            background-size: 100%;
+        }
+    }
+
+    .sm-desc {
+        font-size: 12px;
+        color: #ababab;
+    }
+
+    .name {
+        font-size: 16px;
+    }
+
+    .raiting {
+        img {
+            width: 16px;
+            height: 16px;
+            background-size: 100%;
+            margin-top: 2px;
+        }
+
+        display: flex;
+        justify-content: space-between;
+        width: 40px;
+        font-size: 14px;
+        color: #f5b03f;
+    }
+
+    .btns_and_price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .btns {
+            display: flex;
+            justify-content: space-between;
+            width: 90px;
+
+            button {
+                width: 40px;
+                height: 40px;
+                border-radius: 8px;
+                border: none;
+                background: @important_color;
+
+                img {
+                    width: 24px;
+                    height: 24px;
+                    background-size: 100%;
+                }
+            }
+        }
+
+        .price {
+            margin-right: 12px;
+            display: table-cell;
+            vertical-align: middle;
+            p {
+                margin: 0;
+                color: #f5b03f;
+                font-size: 24px;
+            }
+        }
+    }
+
+    transition: 0.5s all;
+}
+
+.product:hover {
+    box-shadow: 0px 0px 20px #afafaf;
+}
+
+.mgb {
+    margin-bottom: 56px;
+}
+
+.nofound {
+    min-height: 700px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 374px) {
+    .catalog-nav {
+        button {
+            width: 100px;
+            height: 44px;
+        }
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .catalog-nav {
+        button {
+            width: 80px;
+            height: 40px;
+        }
+    }
+}

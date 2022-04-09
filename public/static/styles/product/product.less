@@ -1,0 +1,420 @@
+@font-face {
+  font-family: Ralewaymed;
+  src: url(/Fonts/raleway/Raleway-Medium.ttf);
+}
+
+main {
+  font-family: Ralewaymed;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  margin-top: 50px;
+  min-height: 800px;
+  p {
+    margin-bottom: 0rem;
+  }
+  .prod_img {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 500px;
+      height: 500px;
+      background-size: 100%;
+    }
+  }
+
+  .descrip {
+    margin-left: 40px;
+    padding: 40px;
+    .type {
+      font-size: 14px;
+      color: #a0a0a0;
+      padding-bottom: 20px;
+    }
+
+    .raiting {
+      display: flex;
+      align-items: center;
+      padding-bottom: 20px;
+
+      p {
+        margin-left: 10px;
+        color: #f5b03f;
+        margin-bottom: 0rem;
+      }
+    }
+
+    .name {
+      padding-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .description {
+      width: 400px;
+      font-size: 14px;
+      color: #838383;
+      line-height: 26px;
+      padding-bottom: 20px;
+    }
+
+    .compound {
+      padding-bottom: 20px;
+      font-size: 15px;
+
+      p {
+        color: #a0a0a0;
+
+        b {
+          color: black;
+        }
+      }
+    }
+
+    .val_and_price {
+      display: flex;
+      justify-content: space-between;
+      width: 360px;
+      padding-bottom: 50px;
+
+      .all {
+        display: flex;
+        justify-content: space-between;
+        width: 220px;
+
+        .val {
+          p {
+            color: #a0a0a0;
+            font-size: 14px;
+          }
+
+          select {
+            background: #ffe5e4;
+            font-family: Ralewaymed;
+            font-size: 14px;
+            outline: none;
+            width: 50px;
+            height: 32px;
+            border: none;
+            border-radius: 8px;
+          }
+        }
+
+        .weight {
+          p {
+            color: #a0a0a0;
+            font-size: 14px;
+          }
+
+          select {
+            background: #ffe5e4;
+            font-family: Ralewaymed;
+            font-size: 14px;
+            outline: none;
+            width: 140px;
+            height: 32px;
+            border: none;
+            border-radius: 8px;
+          }
+        }
+      }
+
+      .price {
+        display: flex;
+        align-items: flex-end;
+
+        p {
+          font-size: 18px;
+          padding-bottom: 6px;
+          color: #f5b03f;
+        }
+      }
+    }
+
+    .buy_and_fav {
+      display: flex;
+      width: 220px;
+      justify-content: space-between;
+
+      button:nth-child(1) {
+        width: 140px;
+        height: 50px;
+        background: #ffe5e4;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0px 0px 6px #cccccc;
+      }
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        border: none;
+        background: #ffe5e4;
+        box-shadow: 0px 0px 6px #cccccc;
+
+        img {
+          width: 26px;
+          height: 26px;
+          background-size: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 930px) {
+  main {
+    .descrip {
+      .description {
+        width: 320px;
+      }
+
+      .val_and_price {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  body {
+    align-items: flex-start;
+  }
+
+  main {
+    flex-direction: column;
+
+    .descrip {
+      margin: 0;
+
+      .description {
+        width: 400px;
+      }
+
+      .val_and_price {
+        width: 360px;
+      }
+
+      .val_and_price {
+        padding-bottom: 30px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 570px) {
+  main {
+    flex-direction: column;
+
+    .prod_img {
+      img {
+        width: 400px;
+        height: 400px;
+      }
+    }
+
+    .descrip {
+      margin: 0;
+
+      .description {
+        width: 400px;
+      }
+
+      .val_and_price {
+        width: 360px;
+        select {
+          background: #ffe5e4;
+          border: none;
+        }
+      }
+
+      .val_and_price {
+        padding-bottom: 30px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+  main {
+    flex-direction: column;
+
+    .prod_img {
+      img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    .descrip {
+      .description {
+        width: 360px;
+      }
+
+      .val_and_price {
+        width: 320px;
+      }
+
+      .val_and_price {
+        padding-bottom: 30px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  main {
+    flex-direction: column;
+
+    .prod_img {
+      img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    .descrip {
+      .description {
+        width: 320px;
+      }
+
+      .val_and_price {
+        width: 320px;
+      }
+
+      .val_and_price {
+        padding-bottom: 30px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 380px) {
+  main {
+    flex-direction: column;
+
+    .prod_img {
+      img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    .descrip {
+      .description {
+        width: 320px;
+      }
+
+      .val_and_price {
+        width: 280px;
+        .all {
+          width: 180px;
+          .weight {
+            select {
+              width: 100px;
+            }
+          }
+        }
+      }
+      .buy_and_fav {
+        width: 180px;
+        button:nth-child(1) {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  main {
+    flex-direction: column;
+
+    .prod_img {
+      img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    .descrip {
+      padding: 20px;
+      .description {
+        width: 300px;
+      }
+
+      .val_and_price {
+        width: 280px;
+        .all {
+          width: 180px;
+          .weight {
+            select {
+              width: 100px;
+            }
+          }
+        }
+      }
+      .buy_and_fav {
+        width: 180px;
+        button:nth-child(1) {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 330px) {
+  main {
+    flex-direction: column;
+
+    .prod_img {
+      img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    .descrip {
+      .description {
+        width: 280px;
+      }
+
+      .val_and_price {
+        width: 260px;
+        .all {
+          width: 180px;
+          .weight {
+            select {
+              width: 100px;
+            }
+          }
+        }
+      }
+      .buy_and_fav {
+        width: 180px;
+        button:nth-child(1) {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 300px) {
+  main {
+    .prod_img {
+      padding: 0;
+      img {
+        width: 280px;
+        height: 280px;
+      }
+    }
+    .descrip {
+      .description {
+        width: 270px;
+      }
+      padding: 10px;
+    }
+  }
+}

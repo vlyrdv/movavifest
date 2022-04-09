@@ -1,0 +1,330 @@
+@font-face {
+  font-family: Ralewaymed;
+  src: url(/Fonts/raleway/Raleway-Medium.ttf);
+}
+main {
+  font-family: Ralewaymed;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  margin-top: 50px;
+  min-height: 800px;
+}
+main p {
+  margin-bottom: 0rem;
+}
+main .prod_img {
+  display: flex;
+  justify-content: center;
+}
+main .prod_img img {
+  width: 500px;
+  height: 500px;
+  background-size: 100%;
+}
+main .descrip {
+  margin-left: 40px;
+  padding: 40px;
+}
+main .descrip .type {
+  font-size: 14px;
+  color: #a0a0a0;
+  padding-bottom: 20px;
+}
+main .descrip .raiting {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+main .descrip .raiting p {
+  margin-left: 10px;
+  color: #f5b03f;
+  margin-bottom: 0rem;
+}
+main .descrip .name {
+  padding-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+main .descrip .description {
+  width: 400px;
+  font-size: 14px;
+  color: #838383;
+  line-height: 26px;
+  padding-bottom: 20px;
+}
+main .descrip .compound {
+  padding-bottom: 20px;
+  font-size: 15px;
+}
+main .descrip .compound p {
+  color: #a0a0a0;
+}
+main .descrip .compound p b {
+  color: black;
+}
+main .descrip .val_and_price {
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+  padding-bottom: 50px;
+}
+main .descrip .val_and_price .all {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+}
+main .descrip .val_and_price .all .val p {
+  color: #a0a0a0;
+  font-size: 14px;
+}
+main .descrip .val_and_price .all .val select {
+  background: #ffe5e4;
+  font-family: Ralewaymed;
+  font-size: 14px;
+  outline: none;
+  width: 50px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+}
+main .descrip .val_and_price .all .weight p {
+  color: #a0a0a0;
+  font-size: 14px;
+}
+main .descrip .val_and_price .all .weight select {
+  background: #ffe5e4;
+  font-family: Ralewaymed;
+  font-size: 14px;
+  outline: none;
+  width: 140px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+}
+main .descrip .val_and_price .price {
+  display: flex;
+  align-items: flex-end;
+}
+main .descrip .val_and_price .price p {
+  font-size: 18px;
+  padding-bottom: 6px;
+  color: #f5b03f;
+}
+main .descrip .buy_and_fav {
+  display: flex;
+  width: 220px;
+  justify-content: space-between;
+}
+main .descrip .buy_and_fav button:nth-child(1) {
+  width: 140px;
+  height: 50px;
+  background: #ffe5e4;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #cccccc;
+}
+main .descrip .buy_and_fav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  background: #ffe5e4;
+  box-shadow: 0px 0px 6px #cccccc;
+}
+main .descrip .buy_and_fav a img {
+  width: 26px;
+  height: 26px;
+  background-size: 100%;
+}
+@media screen and (max-width: 930px) {
+  main .descrip .description {
+    width: 320px;
+  }
+  main .descrip .val_and_price {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 850px) {
+  body {
+    align-items: flex-start;
+  }
+  main {
+    flex-direction: column;
+  }
+  main .descrip {
+    margin: 0;
+  }
+  main .descrip .description {
+    width: 400px;
+  }
+  main .descrip .val_and_price {
+    width: 360px;
+  }
+  main .descrip .val_and_price {
+    padding-bottom: 30px;
+  }
+}
+@media screen and (max-width: 570px) {
+  main {
+    flex-direction: column;
+  }
+  main .prod_img img {
+    width: 400px;
+    height: 400px;
+  }
+  main .descrip {
+    margin: 0;
+  }
+  main .descrip .description {
+    width: 400px;
+  }
+  main .descrip .val_and_price {
+    width: 360px;
+  }
+  main .descrip .val_and_price select {
+    background: #ffe5e4;
+    border: none;
+  }
+  main .descrip .val_and_price {
+    padding-bottom: 30px;
+  }
+}
+@media screen and (max-width: 450px) {
+  main {
+    flex-direction: column;
+  }
+  main .prod_img img {
+    width: 300px;
+    height: 300px;
+  }
+  main .descrip .description {
+    width: 360px;
+  }
+  main .descrip .val_and_price {
+    width: 320px;
+  }
+  main .descrip .val_and_price {
+    padding-bottom: 30px;
+  }
+}
+@media screen and (max-width: 400px) {
+  main {
+    flex-direction: column;
+  }
+  main .prod_img img {
+    width: 300px;
+    height: 300px;
+  }
+  main .descrip .description {
+    width: 320px;
+  }
+  main .descrip .val_and_price {
+    width: 320px;
+  }
+  main .descrip .val_and_price {
+    padding-bottom: 30px;
+  }
+}
+@media screen and (max-width: 380px) {
+  main {
+    flex-direction: column;
+  }
+  main .prod_img img {
+    width: 300px;
+    height: 300px;
+  }
+  main .descrip .description {
+    width: 320px;
+  }
+  main .descrip .val_and_price {
+    width: 280px;
+  }
+  main .descrip .val_and_price .all {
+    width: 180px;
+  }
+  main .descrip .val_and_price .all .weight select {
+    width: 100px;
+  }
+  main .descrip .buy_and_fav {
+    width: 180px;
+  }
+  main .descrip .buy_and_fav button:nth-child(1) {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 360px) {
+  main {
+    flex-direction: column;
+  }
+  main .prod_img img {
+    width: 300px;
+    height: 300px;
+  }
+  main .descrip {
+    padding: 20px;
+  }
+  main .descrip .description {
+    width: 300px;
+  }
+  main .descrip .val_and_price {
+    width: 280px;
+  }
+  main .descrip .val_and_price .all {
+    width: 180px;
+  }
+  main .descrip .val_and_price .all .weight select {
+    width: 100px;
+  }
+  main .descrip .buy_and_fav {
+    width: 180px;
+  }
+  main .descrip .buy_and_fav button:nth-child(1) {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 330px) {
+  main {
+    flex-direction: column;
+  }
+  main .prod_img img {
+    width: 300px;
+    height: 300px;
+  }
+  main .descrip .description {
+    width: 280px;
+  }
+  main .descrip .val_and_price {
+    width: 260px;
+  }
+  main .descrip .val_and_price .all {
+    width: 180px;
+  }
+  main .descrip .val_and_price .all .weight select {
+    width: 100px;
+  }
+  main .descrip .buy_and_fav {
+    width: 180px;
+  }
+  main .descrip .buy_and_fav button:nth-child(1) {
+    width: 100px;
+  }
+}
+@media screen and (max-width: 300px) {
+  main .prod_img {
+    padding: 0;
+  }
+  main .prod_img img {
+    width: 280px;
+    height: 280px;
+  }
+  main .descrip {
+    padding: 10px;
+  }
+  main .descrip .description {
+    width: 270px;
+  }
+}
