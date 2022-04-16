@@ -1,0 +1,529 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: Ralewaymed;
+    src: url(/Fonts/raleway/Raleway-Medium.ttf);
+}
+
+main {
+
+    width: 100%;
+    min-height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Ralewaymed;
+
+    .user {
+        position: relative;
+        width: 800px;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #ffe5e4;
+        border-radius: 20px;
+        box-sizing: border-box;
+        padding: 30px;
+
+        .sign_up {
+            transition: all 1s;
+
+            form {
+                overflow: hidden;
+                transition: all 2s;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .text {
+                    margin-bottom: 30px;
+
+                    p {
+                        font-size: 30px;
+                        font-weight: 900;
+                    }
+                }
+
+                input {
+                    margin-bottom: 10px;
+                    width: 240px;
+                    height: 40px;
+                    box-sizing: border-box;
+                    padding-left: 10px;
+                    border-radius: 8px;
+                    border: 0;
+                }
+
+                button {
+                    width: 160px;
+                    height: 40px;
+                    box-sizing: border-box;
+                    border-radius: 8px;
+                    border: 0;
+                    background-color: #f88cc4;
+                }
+            }
+        }
+
+        .active {
+            width: 450px;
+
+            form {
+                visibility: visible;
+            }
+        }
+
+        .notactive {
+            width: 350px;
+
+            form {
+                visibility: hidden;
+            }
+        }
+
+        .sign_in {
+            transition: all 1s;
+
+            form {
+                overflow: hidden;
+                transition: all 2s;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .text {
+                    margin-bottom: 30px;
+
+                    p {
+                        font-size: 30px;
+                        font-weight: 900;
+                    }
+                }
+
+                input {
+                    margin-bottom: 10px;
+                    width: 240px;
+                    height: 40px;
+                    box-sizing: border-box;
+                    padding-left: 10px;
+                    border-radius: 8px;
+                    border: 0;
+                }
+
+                .forgot {
+                    display: flex;
+                    align-items: center;
+                    height: 40px;
+                    margin-bottom: 10px;
+
+                    a {
+                        font-size: 14px;
+                        text-decoration: none;
+                        color: black;
+                        border-bottom: 1px solid gray;
+                    }
+                }
+
+                button {
+                    width: 160px;
+                    height: 40px;
+                    box-sizing: border-box;
+                    border-radius: 8px;
+                    border: 0;
+                    background-color: #f88cc4;
+                }
+            }
+        }
+
+        .wall {
+            position: absolute;
+            height: 500px;
+            width: 350px;
+            background: #f88cc4;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            transition: all 1s;
+
+            h2 {
+                text-align: center;
+                font-size: 30px;
+                color: white;
+                margin-bottom: 20px;
+            }
+
+            p {
+                margin-bottom: 20px;
+            }
+
+            button {
+                width: 200px;
+                height: 40px;
+                border-radius: 10px;
+                background: none;
+                border: 2px solid white;
+            }
+        }
+
+        .reg {
+            right: 0;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .log {
+            right: 450px;
+            border-radius: 0;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 820px) {
+    main {
+        .user {
+            width: 700px;
+
+            .active {
+                width: 400px;
+            }
+
+            .notactive {
+                width: 300px;
+            }
+
+            .wall {
+                width: 300px;
+            }
+
+            .log {
+                right: 400px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 720px) {
+    main {
+        .user {
+            width: 600px;
+
+            .active {
+                width: 350px;
+            }
+
+            .notactive {
+                width: 250px;
+            }
+
+            .sign_in {
+                form {
+                    transition: all 0.6s;
+                }
+            }
+
+            .sign_up {
+                form {
+                    transition: all 0.6s;
+                }
+            }
+
+            .wall {
+                width: 250px;
+
+                h2 {
+                    font-size: 25px;
+                }
+
+                p {
+                    text-align: center;
+                }
+            }
+
+            .log {
+                right: 350px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 620px) {
+    main {
+        .user {
+            width: 500px;
+
+            .active {
+                width: 300px;
+            }
+
+            .notactive {
+                width: 200px;
+            }
+
+            .sign_in {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .sign_up {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .wall {
+                width: 200px;
+
+                h2 {
+                    font-size: 25px;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                button {
+                    width: 180px;
+                }
+            }
+
+            .log {
+                right: 300px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 520px) {
+    main {
+        position: relative;
+        top: 100px;
+        margin-bottom: 160px;
+
+        .user {
+            width: 400px;
+            height: 700px;
+            flex-direction: column;
+
+            .active {
+                width: 400px;
+
+                form {
+                    visibility: visible;
+                }
+            }
+
+            .notactive {
+                width: 100px;
+
+                form {
+                    visibility: visible;
+                }
+            }
+
+            .sign_in {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .sign_up {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .wall {
+                width: 400px;
+                height: 350px;
+
+                h2 {
+                    font-size: 25px;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                button {
+                    width: 180px;
+                }
+            }
+
+            .reg {
+                bottom: 0;
+                border-radius: 0;
+                border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+
+            }
+
+            .log {
+                bottom: 350px;
+                right: 0;
+                left: 0;
+                border-radius: 0;
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 420px) {
+    main {
+
+        .user {
+            width: 300px;
+            height: 700px;
+            flex-direction: column;
+
+            .active {
+                width: w00px;
+
+                form {
+                    visibility: visible;
+                }
+            }
+
+            .notactive {
+                width: w00px;
+
+                form {
+                    visibility: visible;
+                }
+            }
+
+            .sign_in {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .sign_up {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .wall {
+                width: 300px;
+                height: 350px;
+
+                h2 {
+                    font-size: 25px;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                button {
+                    width: 180px;
+                }
+            }
+
+            .reg {
+                bottom: 0;
+                border-radius: 0;
+                border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+
+            }
+
+            .log {
+                bottom: 350px;
+                right: 0;
+                left: 0;
+                border-radius: 0;
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 390px) {
+    main {
+
+        .user {
+            width: 280px;
+            height: 700px;
+            flex-direction: column;
+
+            .active {
+                width: 300px;
+
+                form {
+                    visibility: visible;
+                }
+            }
+
+            .notactive {
+                width: 100px;
+
+                form {
+                    visibility: visible;
+                }
+            }
+
+            .sign_in {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .sign_up {
+                form {
+                    transition: all 0.5s;
+                }
+            }
+
+            .wall {
+                width: 280px;
+                height: 350px;
+
+                h2 {
+                    font-size: 25px;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                button {
+                    width: 180px;
+                }
+            }
+
+            .reg {
+                bottom: 0;
+                border-radius: 0;
+                border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+
+            }
+
+            .log {
+                bottom: 350px;
+                right: 0;
+                left: 0;
+                border-radius: 0;
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
+            }
+        }
+    }
+}

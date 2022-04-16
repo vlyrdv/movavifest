@@ -3,11 +3,22 @@ const sqlite = require('sqlite3');
 const hbs = require("hbs");
 const app = express();
 const session = require('express-session');
+const jsSHA = require('jssha');
+const bodyparser = require('body-parser');
 
 const port = 5500
 
+app.use(
+    bodyparser.urlencoded({
+        extended: true
+    })
+);
+
 let stringSimilarity = require("string-similarity");
 const req = require("express/lib/request");
+const {
+    response
+} = require("express");
 
 let similarity = stringSimilarity.compareTwoStrings("healed", "sealed");
 
@@ -22,8 +33,32 @@ app.use(session({
 
 app.use(express.static(__dirname + "/public"));
 
-async function get_data(sql = "SELECT * FROM products") {
-    let db = new sqlite.Database("shop.db", (err) => {
+async function get_data(sql = "SELECT * FROM products", mass) {
+    let db = new sqlite.Database("berry.db", (err) => {
+        if (err) {
+            console.error(err.message);
+        } else {
+            //pass
+        }
+    });
+
+    let promise = new Promise((res, rej) => {
+        db.all(sql, mass, (err, rows) => {
+            if (err) {
+                rej(err);
+            } else {
+                res(rows)
+            }
+        });
+    })
+
+    let data = await promise;
+    db.close();
+    return data;
+}
+
+async function insert_data(sql, mass) {
+    let db = new sqlite.Database("berry.db", (err) => {
         if (err) {
             console.error(err.message);
         } else {
@@ -33,7 +68,7 @@ async function get_data(sql = "SELECT * FROM products") {
 
 
     let promise = new Promise((res, rej) => {
-        db.all(sql, (err, rows) => {
+        db.run(sql, mass, (err, rows) => {
             if (err) {
                 rej(err);
             } else {
@@ -90,9 +125,9 @@ app.get('/', (request, response) => {
             response.render("index.hbs", new_data);
         })
     } else {
-        request.session.islogin = 1
         get_data("SELECT product_name, img FROM `cart` JOIN `users` ON user_id = id JOIN `products` ON product_id = id_product WHERE user_id = 1").then((cart_data) => {
             let count = 0
+            new_data["islogin"] = request.session.user_name;
             for (i in cart_data) {
                 if (count == 3) {
                     break
@@ -310,7 +345,8 @@ app.get('/search', (request, response) => {
         data: {
 
         },
-        cart: {}
+        cart: {},
+        islogin: 0
     }
     if (request.session.islogin != 1) {
         get_data().then((data) => {
@@ -359,6 +395,7 @@ app.get('/search', (request, response) => {
         request.session.islogin = 1
         get_data("SELECT product_name, img FROM `cart` JOIN `users` ON user_id = id JOIN `products` ON product_id = id_product").then((cart_data) => {
             let count = 0
+            new_data["islogin"] = 1
             for (i in cart_data) {
                 if (count == 3) {
                     break
@@ -557,6 +594,7 @@ app.get("/cartdelete", (request, response) => {
     let cart_id = request.query.id
     if (request.session.islogin != 1) {
         delete request.session.cart.cart_id
+        response.redirect('/cart');
     } else {
         get_data(`DELETE FROM cart WHERE cart_id = ${cart_id}`).then((prod_id) => {
             response.redirect('/cart');
@@ -730,6 +768,129 @@ app.get("/info", (request, response) => {
         })
     }
 })
+
+
+app.get('/auth', (request, response) => {
+    let new_data = {
+        data: {
+
+        },
+        cart: {},
+        islogin: 0
+    }
+    if (request.session.islogin != 1) {
+        let count = 0
+        get_data().then((data) => {
+            if (request.session.cart.length > 0) {
+                for (i in request.session.cart) {
+                    for (j in data) {
+                        if (count == 3) {
+                            break
+                        }
+                        if (request.session.cart[i]["product_name"] == data[j]["product_name"]) {
+                            new_data["cart"][request.session.cart[i]["product_name"]] = {
+                                "img": data[j]["img"]
+                            }
+                            count++
+                        }
+                    }
+                }
+            } else {
+                if (Object.keys(new_data["cart"]).length < 1) {
+                    new_data["cart"] = false;
+                }
+            }
+            if (request.session.mess) {
+                new_data["mess"] = request.session.mess
+                request.session.mess = undefined
+            } else {
+                request.session.mess = false
+            }
+            console.log(new_data["mess"])
+            response.render("register.hbs", new_data);
+        })
+    } else {
+        request.session.islogin = 1
+        get_data("SELECT product_name, img FROM `cart` JOIN `users` ON user_id = id JOIN `products` ON product_id = id_product WHERE user_id = 1").then((cart_data) => {
+            let count = 0
+            for (i in cart_data) {
+                if (count == 3) {
+                    break
+                }
+                new_data["cart"][cart_data[i]["product_name"]] = {
+                    "img": cart_data[i]["img"]
+                }
+                count++
+            }
+            if (Object.keys(new_data["cart"]).length < 1) {
+                new_data["cart"] = false;
+            }
+            if (request.session.mess) {
+                new_data["mess"] = request.session.mess
+            } else {
+                request.session.mess = false
+            }
+            response.render("register.hbs", new_data);
+        })
+    }
+});
+
+app.post("/registration", (request, response) => {
+    let user_name = request.body.name;
+    let email = request.body.email;
+    let password = request.body.password;
+    get_data(`SELECT * FROM users WHERE email = ?`, [email]).then((data) => {
+        if (data.length > 0) {
+            request.session.mess = "Почта уже занята"
+            response.redirect("/auth")
+        } else {
+            const shaObj = new jsSHA("SHA3-512", "TEXT", {
+                encoding: "UTF8",
+            });
+            shaObj.update(password);
+            const hashedPassword = shaObj.getHash("HEX");
+            insert_data("INSERT INTO users(name, email, password, status) VALUES(?, ?, ?, ?)", [user_name, email, hashedPassword, 1]).then((data) => {
+                request.session.islogin = 1;
+                request.session.user_name = user_name;
+                response.redirect("/")
+            })
+        }
+    })
+})
+
+
+app.post("/login", (request, response) => {
+    let email = request.body.email;
+    let password = request.body.password;
+    get_data("SELECT * FROM users where email = ?", [email]).then((data) => {
+        if (data.length > 0) {
+            const shaObj = new jsSHA("SHA3-512", "TEXT", {
+                encoding: "UTF8",
+            });
+            shaObj.update(password);
+            const hashedPassword = shaObj.getHash("HEX");
+            if (hashedPassword == data[0]["password"]) {
+                request.session.islogin = 1;
+                request.session.user_name = data[0]["name"];
+                response.redirect("/");
+            } else {
+                request.session.mess = "Неверный пароль"
+                response.redirect("/auth")
+            }
+        } else {
+            request.session.mess = "Такой почты не найдено"
+            response.redirect("/auth")
+        }
+    })
+
+})
+
+app.get("/logout", (request, response) => {
+    request.session.islogin = 0;
+    request.session.user_name = undefined;
+    response.redirect("/")
+})
+
 
 app.listen(port, () => {
     console.log('Hello!');

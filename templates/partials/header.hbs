@@ -93,9 +93,9 @@
                                 <div class="item">
                                     <img src="/icons/user.png" alt="">
                                     {{#if islogin}}
-                                    <p>Валерий - выйти</p>
+                                    <p><a href="/logout">{{islogin}} - выйти</a></p>
                                     {{else}}
-                                    <p>Войти</p>
+                                    <p><a href="/auth">Войти</a></p>
                                     {{/if}}
                                 </div>
                             </li>

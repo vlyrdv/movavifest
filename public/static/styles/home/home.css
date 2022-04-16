@@ -116,12 +116,12 @@ main .home .foto .fototext {
   main .home .foto img {
     display: none;
   }
+  main .home .foto .fototext {
+    width: 250px;
+    color: white;
+  }
   main .home .foto .fototext h1 {
     font-size: 30px;
-    color: black;
-  }
-  main .home .foto .fototext p {
-    color: black;
   }
 }
 @media screen and (max-width: 520px) {
@@ -135,13 +135,10 @@ main .home .foto .fototext {
   main .home .foto .fototext {
     width: 220px;
     padding-right: 0;
+    color: white;
   }
   main .home .foto .fototext h1 {
-    font-size: 20px;
-    color: black;
-  }
-  main .home .foto .fototext p {
-    color: black;
+    font-size: 18px;
   }
   main .home .foto .fototext button {
     width: 120px;
