@@ -34,12 +34,12 @@
         {{#each data}}
         <div class="item">
             <div class="img">
-                <img src="{{img}}" alt="">
+                <img src="{{this.img}}" alt="">
             </div>
             <div class="description">
                 <div class="small_desc_and_sum">
                     <div class="small_desc">
-                        <p>{{sm_desc}}</p>
+                        <p>{{this.sm_desc}}</p>
                     </div>
                     <div class="sum">
                         <p>Сумма:</p>
@@ -48,14 +48,14 @@
                 <div class="name_and_price">
                     <div class="name_and_lowprice">
                         <div class="name">
-                            <p>{{@key}}</p>
+                            <p>{{this.product_name}}</p>
                         </div>
                         <div class="lowprice">
-                            <p><b id="lowprice">{{price}}</b> р / 100г.</p>
+                            <p><b id="lowprice">{{this.price}}</b> р / 100г.</p>
                         </div>
                     </div>
                     <div class="price">
-                        <p><b id="pr1ce">{{itog_price}}</b>р</p>
+                        <p><b id="pr1ce">{{this.itog_price}}</b>р</p>
                     </div>
                 </div>
                 <div class="val_and_price">
@@ -63,7 +63,7 @@
                         <div class="weight">
                             <p>Вес</p>
                             <div>
-                                <span>{{weight}} гр.</span>
+                                <span>{{this.weight}} гр.</span>
                             </div>
                             {{!-- <select name="" id="weight">
                                 {{#each grams}}
@@ -78,7 +78,7 @@
                         <div class="val">
                             <p>Пакеты</p>
                             <div>
-                                <span>{{value}} шт.</span>
+                                <span>{{this.value}} шт.</span>
                             </div>
                             {{!-- <select name="" id="val">
                                 {{#each vals}}
@@ -93,10 +93,10 @@
                     </div>
                     <div class="icons">
                         <div class="heart">
-                            <a href="/likeadd?prod_id={{id_product}}"><img src="/icons/heart_g.png" alt=""></a>
+                            <a href="/likeadd?prod_id={{this.id_product}}"><img src="/icons/heart_g.png" alt=""></a>
                         </div>
                         <div class="delete">
-                            <a href="/cartdelete?id={{cart_id}}"><img src="/icons/delete_cart.png" alt=""></a>
+                            <a href="/cartdelete?id={{this.cart_id}}"><img src="/icons/delete_cart.png" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
         </div>
         {{/each}}
         <div class="buy">
-            <a href="">
+            <a href="/new_order">
                 <button>Заказать</button>
             </a>
         </div>

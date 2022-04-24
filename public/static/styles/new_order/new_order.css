@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+main {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 100px;
+}
+main h1 {
+  margin-bottom: 80px;
+}
+main form {
+  width: 360px;
+}
+main form .address {
+  margin-bottom: 20px;
+}
+main form .address p {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+main form .address .inps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main form .address .inps input {
+  font-size: 16px;
+  width: 360px;
+  height: 40px;
+  box-sizing: border-box;
+  padding-left: 20px;
+  background: #ffe5e4;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #cccccc;
+  outline: none;
+}
+main form .address .inps .low {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+}
+main form .address .inps .low input {
+  padding-left: 14px;
+  width: 70px;
+  height: 40px;
+  box-sizing: border-box;
+}
+main form .address .inps .low input::placeholder {
+  font-size: 10px;
+}
+main form .contact {
+  margin-bottom: 20px;
+}
+main form .contact p {
+  font-size: 25px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+main form .contact input {
+  font-size: 16px;
+  width: 360px;
+  height: 40px;
+  box-sizing: border-box;
+  padding-left: 20px;
+  background: #ffe5e4;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #cccccc;
+  outline: none;
+}
+main form .pay {
+  margin-bottom: 40px;
+}
+main form .pay p {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+main form .pay select {
+  width: 360px;
+  height: 40px;
+  box-sizing: border-box;
+  font-size: 16px;
+  padding-left: 20px;
+  background: #ffe5e4;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #cccccc;
+  outline: none;
+}
+main form .products {
+  margin-bottom: 40px;
+}
+main form .products p {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+main form .products .cart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+  height: 50px;
+}
+main form .products .cart p {
+  display: flex;
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+main form .products .cart:nth-child(2) {
+  border-top: 1px solid gray;
+}
+main form .summ {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+main form .summ p {
+  margin-bottom: 0px;
+}
+main form .delivery {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+main form .delivery p {
+  margin-bottom: 0px;
+}
+main form .itogo {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+  margin-bottom: 10px;
+}
+main form .itogo p {
+  margin-bottom: 0px;
+}
+main form .send {
+  display: flex;
+  justify-content: center;
+}
+main form .send button {
+  width: 180px;
+  height: 50px;
+  background: #ffe5e4;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #cccccc;
+}

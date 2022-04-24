@@ -681,6 +681,8 @@ nav .desktop-nav li a:hover {
   .desktop-nav li:nth-last-child(1) .all_cart .cart_box ol li .item p {
     margin-left: 16px;
     color: #0065cc;
+    display: flex;
+    align-items: center;
   }
   .desktop-nav li:nth-last-child(1) .all_cart .cart_box ol li .item p a {
     opacity: 1;

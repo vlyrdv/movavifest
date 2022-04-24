@@ -93,7 +93,8 @@
                                 <div class="item">
                                     <img src="/icons/user.png" alt="">
                                     {{#if islogin}}
-                                    <p><a href="/logout">{{islogin}} - выйти</a></p>
+                                    <p class="name"><a href="/chenge_data">{{islogin}}</a> - <a href="/logout"
+                                            style="color: red;">выйти</a></p>
                                     {{else}}
                                     <p><a href="/auth">Войти</a></p>
                                     {{/if}}
