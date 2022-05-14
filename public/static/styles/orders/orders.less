@@ -1,0 +1,101 @@
+@font-face {
+    font-family: Ralewaymed;
+    src: url(/Fonts/raleway/Raleway-Medium.ttf);
+}
+
+main {
+    font-family: Ralewaymed;
+    margin-top: 100px;
+    margin-bottom: 49px;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+    .text {
+        text-align: center;
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+
+            button {
+                width: 200px;
+                height: 50px;
+                background: #ffe5e4;
+                border: none;
+                border-radius: 8px;
+                box-shadow: 0px 0px 6px #cccccc;
+            }
+        }
+    }
+
+
+    .item {
+        border-radius: 8px;
+        width: auto;
+        background-color: #ffe5e4;
+        padding: 20px;
+
+        .data {
+            border-bottom: 1px solid #bababa;
+            display: flex;
+            justify-content: space-between;
+            width: 400px;
+            font-weight: 900;
+            padding-bottom: 20px;
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+
+            div {
+                display: flex;
+                align-items: center;
+
+                a {
+                    text-decoration: none;
+                }
+
+                p {
+                    margin: 0em;
+                }
+            }
+
+            border-bottom: 1px solid #bababa;
+
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    main {
+        .item {
+            .data {
+                width: 300px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 365px) {
+    main {
+        .item {
+            .data {
+                width: 280px;
+            }
+        }
+    }
+}

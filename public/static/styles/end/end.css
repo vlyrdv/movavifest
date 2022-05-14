@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: Ralewaymed;
+  src: url(/Fonts/raleway/Raleway-Medium.ttf);
+}
+main {
+  font-family: Ralewaymed;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .text {
+  text-align: center;
+}
+main .text h1 {
+  margin-bottom: 20px;
+}
+main .text a {
+  text-decoration: none;
+}
+main .text a button {
+  width: 140px;
+  height: 50px;
+  background: #ffe5e4;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px #cccccc;
+}

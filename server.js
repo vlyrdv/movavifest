@@ -2,16 +2,28 @@ const express = require("express");
 const sqlite = require('sqlite3');
 const hbs = require("hbs");
 const app = express();
+const axios = require('axios').default;
 const session = require('express-session');
 const jsSHA = require('jssha');
 const bodyparser = require('body-parser');
-const host = "192.168.0.116"
+const fileUpload = require('express-fileupload');
+require("dotenv").config()
+const nodemailer = require("nodemailer")
+app.use(fileUpload({}));
+const host = "192.168.12.8"
 const port = 5500;
 app.use(
     bodyparser.urlencoded({
         extended: true
     })
 );
+const tranporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD
+    }
+})
 
 let stringSimilarity = require("string-similarity");
 const req = require("express/lib/request");
@@ -832,6 +844,13 @@ app.post("/registration", (request, response) => {
                     request.session.email = email;
                     request.session.cart = [];
                     request.session.like = [];
+                    const mailOptions = {
+                        from: "valerauryadov@gmail.com",
+                        to: email,
+                        subject: "tastyberry",
+                        text: "Вы успешно зарегистрировались на tastyberry.store"
+                    }
+                    tranporter.sendMail(mailOptions)
                     response.redirect("/")
                 })
             })
@@ -857,6 +876,13 @@ app.post("/login", (request, response) => {
                 request.session.user_id = data[0]["id"]
                 request.session.cart = [];
                 request.session.like = [];
+                const mailOptions = {
+                    from: "valerauryadov@gmail.com",
+                    to: email,
+                    subject: "tastyberry",
+                    text: "Вы успешно вошли в аккаунт на tastyberry.store"
+                }
+                tranporter.sendMail(mailOptions)
                 response.redirect("/");
             } else {
                 request.session.mess = "Неверный пароль"
@@ -1008,6 +1034,13 @@ app.post("/chenge_password", (request, response) => {
                 response.redirect("/chenge_data")
             } else {
                 insert_data("UPDATE users SET password = ? WHERE id = ?", [hashedPassword, request.session.user_id]).then((data2) => {
+                    const mailOptions = {
+                        from: "valerauryadov@gmail.com",
+                        to: email,
+                        subject: "tastyberry",
+                        text: "Вы успешно поменяли пароль на tastyberry.store"
+                    }
+                    tranporter.sendMail(mailOptions)
                     response.redirect("/")
                 })
             }
@@ -1060,33 +1093,330 @@ app.get("/new_order", (request, response) => {
             } else {
                 new_data["itogo"] = new_data["summ"]
             }
+            request.session.itogo = new_data["itogo"]
+            if (request.session.ordmes) {
+                new_data["ordmes"] = request.session.ordmes
+                request.session.ordmes = undefined
+            }
             response.render("new_order.hbs", new_data)
         })
     } else {
-        new_data["islogin"] = request.session.user_name;
-        new_data["email"] = request.session.email;
-        get_data("SELECT cart_id, id_product, product_name, img, price, compound, raiting, sm_desc, value, weight FROM `cart` JOIN `products` ON product_id = id_product WHERE user_id = ?", [request.session.user_id]).then((cart_data) => {
+        get_data("SELECT product_name, img FROM `cart` JOIN `users` ON user_id = id JOIN `products` ON product_id = id_product WHERE user_id = ?", [request.session.user_id]).then((cart_data) => {
+            let count = 0
             for (i in cart_data) {
-                new_data["data"].push({
-                    "product_name": cart_data[i]["product_name"],
-                    "itog_price": cart_data[i]["price"] * cart_data[i]["value"] * (cart_data[i]["weight"] / 100)
-                })
-                new_data["summ"] += cart_data[i]["price"] * cart_data[i]["value"] * (cart_data[i]["weight"] / 100)
+                if (count == 3) {
+                    break
+                }
+                new_data["cart"][cart_data[i]["product_name"]] = {
+                    "img": cart_data[i]["img"]
+                }
+                count++
             }
-            if (new_data["summ"] < 3000) {
-                new_data["delivery"] = 690
-                new_data["itogo"] = new_data["summ"] + 690
-            } else {
-                new_data["itogo"] = new_data["summ"]
+            if (Object.keys(new_data["cart"]).length < 1) {
+                new_data["cart"] = false;
             }
-            response.render("new_order.hbs", new_data)
+
+            new_data["islogin"] = request.session.user_name;
+            new_data["email"] = request.session.email;
+            get_data("SELECT cart_id, id_product, product_name, img, price, compound, raiting, sm_desc, value, weight FROM `cart` JOIN `products` ON product_id = id_product WHERE user_id = ?", [request.session.user_id]).then((cart_data) => {
+                for (i in cart_data) {
+                    new_data["data"].push({
+                        "product_name": cart_data[i]["product_name"],
+                        "itog_price": cart_data[i]["price"] * cart_data[i]["value"] * (cart_data[i]["weight"] / 100)
+                    })
+                    new_data["summ"] += cart_data[i]["price"] * cart_data[i]["value"] * (cart_data[i]["weight"] / 100)
+                }
+                if (new_data["summ"] < 3000) {
+                    new_data["delivery"] = 690
+                    new_data["itogo"] = new_data["summ"] + 690
+                } else {
+                    new_data["itogo"] = new_data["summ"]
+                }
+                if (request.session.ordmes) {
+                    new_data["ordmes"] = request.session.ordmes
+                    request.session.ordmes = undefined
+                }
+                request.session.itogo = new_data["itogo"]
+                response.render("new_order.hbs", new_data)
+            })
         })
     }
 })
 
 app.post("/buy", (request, response) => {
-    console.log(request.body)
+    let data = request.body;
+    if (data["address"] === "") {
+        request.session.ordmes = "Укажите адрес"
+        response.redirect("/new_order")
+    } else if (data["entrance"] === "") {
+        request.session.ordmes = "Укажите подъезд"
+        response.redirect("/new_order")
+    } else if (data["floor"] === "") {
+        request.session.ordmes = "Укажите этаж"
+        response.redirect("/new_order")
+    } else if (data["flat"] === "") {
+        request.session.ordmes = "Укажите квартиру"
+        response.redirect("/new_order")
+    } else if (data["intercom"] === "") {
+        request.session.ordmes = "Укажите домофон"
+        response.redirect("/new_order")
+    } else if (data["phonenumber"] === "") {
+        request.session.ordmes = "Укажите номер телефона"
+        response.redirect("/new_order")
+    } else if (data["email"] === "") {
+        request.session.ordmes = "Укажите почту"
+        response.redirect("/new_order")
+    } else {
+        request.session.email = data["email"]
+        if (data.howpay == 1) {
+            let payload = {
+                'projectCode': 'vl_yrdv',
+                'amount': {
+                    'currency': 'RUB',
+                    'amount': request.session.itogo
+                },
+                'description': 'Оплата за заказ)',
+                "successUrl": "http://127.0.0.1:5500/end",
+                "failUrl": "http://127.0.0.1:5500/bad"
+
+            }
+            let headers = {
+                'Authorization': "Bearer valerauryadov@gmail.com:be410a5c-e69d-42b7-a966-9626a0fdbb85",
+            }
+            axios.post('https://api.capusta.space/v1/partner/payment', payload, {
+                    headers: {
+                        'Authorization': "Bearer valerauryadov@gmail.com:be410a5c-e69d-42b7-a966-9626a0fdbb85"
+                    }
+                })
+                .then(function (res) {
+                    response.redirect(res.data.payUrl)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
+            if (request.session.islogin != 1) {
+                let date = new Date();
+                let output = String(date.getDate()).padStart(2, '0') + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getFullYear();
+                insert_data(`INSERT INTO order_numbers(user_id, date, itog_sum, koment) VALUES(?, ?, ?, ?)`, [data["email"], output, request.session.itogo, data["koment"]]).then((datas) => {
+                    get_data("SELECT * FROM order_numbers WHERE user_id = ?", [data["email"]]).then((data2) => {
+                        for (i in request.session.cart) {
+                            insert_data(`INSERT INTO order_products(order_id, product_id, value, weight) VALUES(?, ?, ?, ?)`, [data2[data2.length - 1]["id"], request.session.cart[i]["id_product"], request.session.cart[i]["value"], request.session.cart[i]["weight"]]).then((data3) => {
+
+                            })
+                        }
+                        response.redirect("/end")
+                    })
+                })
+            } else {
+                let date = new Date();
+                let output = String(date.getDate()).padStart(2, '0') + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getFullYear();
+                insert_data(`INSERT INTO order_numbers(user_id, date, itog_sum, koment) VALUES(?, ?, ?, ?)`, [request.session.user_id, output, request.session.itogo, data["koment"]]).then((data) => {
+                    get_data("SELECT * FROM order_numbers WHERE user_id = ?", [request.session.user_id]).then((data2) => {
+                        get_data("SELECT cart_id, id_product, product_name, img, price, compound, raiting, sm_desc, value, weight FROM `cart` JOIN `products` ON product_id = id_product WHERE user_id = ?", [request.session.user_id]).then((cart_data) => {
+                            for (i in cart_data) {
+                                insert_data(`INSERT INTO order_products(order_id, product_id, value, weight) VALUES(?, ?, ?, ?)`, [data2[data2.length - 1]["id"], cart_data[i]["id_product"], cart_data[i]["value"], cart_data[i]["weight"]]).then((data3) => {
+
+                                })
+                            }
+                            response.redirect("/end")
+                        })
+                    })
+                })
+            }
+        }
+
+    }
 })
+app.get('/end', (request, response) => {
+    let new_data = {
+        data: [],
+        cart: {},
+        islogin: 0
+    }
+    if (request.session.islogin != 0) {
+        get_data().then((data) => {
+            if (request.session.cart.length > 0) {
+                for (i in request.session.cart) {
+                    for (j in data) {
+                        if (count == 3) {
+                            break
+                        }
+                        if (request.session.cart[i]["product_name"] == data[j]["product_name"]) {
+                            new_data["cart"][request.session.cart[i]["product_name"]] = {
+                                "img": data[j]["img"]
+                            }
+                            count++
+                        }
+                    }
+                }
+            } else {
+                if (Object.keys(new_data["cart"]).length < 1) {
+                    new_data["cart"] = false;
+                }
+            }
+        })
+        const mailOptions = {
+            from: "valerauryadov@gmail.com",
+            to: request.session.email,
+            subject: "tastyberry",
+            text: "Спасибо за заказ"
+        }
+        tranporter.sendMail(mailOptions)
+        response.render("end.hbs", new_data)
+    } else {
+        get_data("SELECT product_name, img FROM `cart` JOIN `users` ON user_id = id JOIN `products` ON product_id = id_product WHERE user_id = ?", [request.session.user_id]).then((cart_data) => {
+            let count = 0
+            for (i in cart_data) {
+                if (count == 3) {
+                    break
+                }
+                new_data["cart"][cart_data[i]["product_name"]] = {
+                    "img": cart_data[i]["img"]
+                }
+                count++
+            }
+            if (Object.keys(new_data["cart"]).length < 1) {
+                new_data["cart"] = false;
+            }
+        })
+        const mailOptions = {
+            from: "valerauryadov@gmail.com",
+            to: request.session.email,
+            subject: "tastyberry",
+            text: "Спасибо за заказ"
+        }
+        tranporter.sendMail(mailOptions)
+        response.render("end.hbs", new_data)
+    }
+});
+
+app.get('/orders', (request, response) => {
+    let new_data = {
+        data: [],
+        cart: {},
+        islogin: 1,
+        email: 0
+    }
+    if (request.session.islogin != 1) {
+        get_data().then((data) => {
+            if (request.session.cart.length > 0) {
+                for (i in request.session.cart) {
+                    for (j in data) {
+                        if (count == 3) {
+                            break
+                        }
+                        if (request.session.cart[i]["product_name"] == data[j]["product_name"]) {
+                            new_data["cart"][request.session.cart[i]["product_name"]] = {
+                                "img": data[j]["img"]
+                            }
+                            count++
+                        }
+                    }
+                }
+            } else {
+                if (Object.keys(new_data["cart"]).length < 1) {
+                    new_data["cart"] = false;
+                }
+            }
+            new_data["islogin"] = 0
+            response.render("orders.hbs", new_data)
+        })
+    } else {
+        new_data["email"] = request.session.email
+        get_data("SELECT product_name, img FROM `cart` JOIN `users` ON user_id = id JOIN `products` ON product_id = id_product WHERE user_id = ?", [request.session.user_id]).then((cart_data) => {
+            let count = 0
+            for (i in cart_data) {
+                if (count == 3) {
+                    break
+                }
+                new_data["cart"][cart_data[i]["product_name"]] = {
+                    "img": cart_data[i]["img"]
+                }
+                count++
+            }
+            if (Object.keys(new_data["cart"]).length < 1) {
+                new_data["cart"] = false;
+            }
+            get_data("SELECT * FROM order_numbers WHERE user_id = ?", [request.session.user_id]).then((data) => {
+                for (i in data) {
+                    let low = data[i];
+                    low["prods"] = []
+                    get_data("SELECT * FROM order_products JOIN products ON product_id = id_product WHERE order_id = ?", [low["id"]]).then((data2) => {
+                        for (i in data2) {
+                            low["prods"].push(data2[i])
+                        }
+                    })
+                    new_data["data"].push(low)
+                }
+                response.render("orders.hbs", new_data)
+            })
+        })
+    }
+});
+
+app.get('/admin', (request, response) => {
+    response.render("admin.hbs")
+});
+app.post('/goonadmin', (request, response) => {
+    new_data = {
+        data: []
+    }
+    let email = request.body.email;
+    let password = request.body.password;
+    const shaObj = new jsSHA("SHA3-512", "TEXT", {
+        encoding: "UTF8",
+    });
+    shaObj.update(password);
+    const hashedPassword = shaObj.getHash("HEX");
+    get_data("SELECT * FROM users WHERE email = ? AND password = ?", [email, hashedPassword]).then((data) => {
+        if (data.length > 0) {
+            if (data[0]["status"] == 2) {
+                new_data["good"] = 1
+                get_data("SELECT * FROM products").then((data2) => {
+                    for (i in data2) {
+                        new_data["data"].push(data2[i])
+                    }
+                })
+                request.session.adminlog = 1
+                if (request.session.adminlog == 1) {
+                    response.render("admin2.hbs", new_data)
+                } else {
+                    response.redirect("/")
+                }
+            } else {
+                response.redirect("/")
+            }
+        } else {
+            response.redirect("/")
+        }
+    })
+});
+
+app.get('/admindelete', (request, response) => {
+    let id = request.query.id;
+    insert_data("DELETE FROM products WHERE id_product = ?", [id]).then((prod_id) => {
+        response.redirect('/admin');
+    })
+});
+
+
+app.get('/new_product', (request, response) => {
+    response.render("new_product.hbs")
+});
+
+app.post('/create', (request, response) => {
+    let data = request.body
+    request.files.photo.mv(__dirname + '/public/images/' + request.files.photo.name);
+    insert_data(`INSERT INTO products(product_name, img, price, compound, raiting, sm_desc, all_desc) VALUES(?, ?, ?, ?, ?, ?, ?)`, [data["name"], "/images/" + request.files.photo.name, data["price"], data["compound"], data["raiting"], data["sm_desc"], data["all_desc"]]).then((data3) => {
+        response.redirect("/");
+    })
+});
+
+
+
+
+
 
 
 app.listen(port, () => {

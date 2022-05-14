@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/styles/new_product/new_product.css">
+</head>
+
+<body>
+    <main>
+        <form action="/create" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Имя товара">
+            <input type="file" name="photo">
+            <input type="text" name="price" placeholder="Цена за 100гр">
+            <input type="text" name="compound" placeholder="Состав">
+            <input type="text" name="raiting" placeholder="Рейтинг">
+            <input type="text" name="sm_desc" placeholder="Вид">
+            <input type="text" name="all_desc" placeholder="Описание">
+            <button type="submit">Создать</button>
+        </form>
+    </main>
+</body>
+
+</html>

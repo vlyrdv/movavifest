@@ -20,6 +20,9 @@
     {{> header}}
     <main>
         <h1>Оформление заказа</h1>
+        {{#if ordmes}}
+        <p class="mess">{{ordmes}}</p>
+        {{/if}}
         <form action="/buy" method="POST">
             <div class="address">
                 <p>Укажите адрес доставки</p>
@@ -47,7 +50,7 @@
             </div>
             <div class="pay">
                 <p>Выберите способ оплаты</p>
-                <select name="" id="">
+                <select name="howpay" id="">
                     <option value="1">На сайте</option>
                     <option value="0">При получении</option>
                 </select>

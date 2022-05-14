@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/styles/admin2/admin2.css">
+</head>
+
+<body>
+    <main>
+        {{#if good}}
+        {{#each data}}
+        <div class="item">
+            <div class="id">
+                <p>id: {{id_product}}</p>
+            </div>
+            <div class="img">
+                <img src="{{img}}" alt="">
+            </div>
+            <div class="name">
+                <p>{{product_name}}</p>
+            </div>
+            <div class="sm_desk">
+                <p>{{sm_desk}}</p>
+            </div>
+            <div class="raiting">
+                <p>{{raiting}}</p>
+            </div>
+            <div class="price">
+                <p>{{price}}р / 100гр</p>
+            </div>
+            <div class="delete">
+                <a href="/admindelete?id={{id_product}}"><img src="/icons/delete_cart.png" alt=""></a>
+            </div>
+        </div>
+        {{/each}}
+
+        <a href="/new_product">Добавить новый продукт</a>
+        {{/if}}
+    </main>
+</body>
+
+</html>

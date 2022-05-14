@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    min-height: 700px;
+    display: flex;
+    justify-content: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 400px;
+        height: 600px;
+        background-color: black;
+
+        input {
+            margin-bottom: 20px;
+            height: 40px;
+            width: 200px;
+            box-sizing: border-box;
+            padding-left: 10px;
+        }
+
+        input:nth-child(2) {
+            padding-left: 0;
+            color: white;
+        }
+
+        button {
+            height: 40px;
+            width: 200px;
+            box-sizing: border-box;
+        }
+    }
+}
